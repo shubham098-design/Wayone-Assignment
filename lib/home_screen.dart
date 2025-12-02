@@ -148,7 +148,28 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: h * 0.04),
+                SizedBox(height: h * 0.03),
+                InviteBannerExact(),
+                SizedBox(height: h * 0.03),
+                CelebrityShoutoutCard(),
+                SizedBox(height: h * 0.03),
+                LuckyWheelCard(),
+                SizedBox(height: h * 0.03),
+
+                SizedBox(
+                  height: h * 0.32,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _CreatorCard(name: "Armani - Watch", city: "Requirement - Male Model\nNew Delhi", img: "assets/images/watch.png", w: w, h: h),
+                      SizedBox(width: w * 0.04),
+                      _CreatorCard(name: "Gucci - Sneaker", city: "Requirement - Female Model\nNew Delhi", img: "assets/images/sneaker.png", w: w, h: h),
+                      SizedBox(width: w * 0.04),
+                      _CreatorCard(name: "Zara - Perfume", city: "Requirement - Unisex Model\nDelhi NCR", img: "assets/images/zara.png", w: w, h: h),
+                    ],
+                  ),
+                ),
+
               ],
             ),
           ),
@@ -273,6 +294,556 @@ class _CreatorCard extends StatelessWidget {
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+
+class InviteBannerExact extends StatelessWidget {
+  const InviteBannerExact({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+
+    return Container(
+      width: w,
+      height: 150,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+        gradient: const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Color(0xFFE85F4F), // same orange-red shade
+            Color(0xFFE87A60), // lighter curved blend
+          ],
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(22),
+        child: Stack(
+          children: [
+            // BACKGROUND CURVES
+            Positioned(
+              right: -40,
+              top: -10,
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white.withOpacity(0.10),
+                ),
+              ),
+            ),
+            Positioned(
+              right: -10,
+              bottom: -20,
+              child: Container(
+                width: 180,
+                height: 180,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white.withOpacity(0.12),
+                ),
+              ),
+            ),
+
+            // MAIN CONTENT
+            Row(
+              children: [
+                // LEFT IMAGE
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: SizedBox(
+                    width: w * 0.28,
+                    height: 150,
+                    child: Image.asset(
+                      "assets/images/user.png", // Change your path
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 10),
+
+                // TEXT + BUTTON
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Text(
+                            "Earn 1000 Coins",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Text(
+                              "New",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 6),
+
+                      const Text(
+                        "Invite friends and get benefits\nvia our referral system",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 13,
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 18, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF10D5C1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text(
+                          "Invite Now",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CelebrityShoutoutCard extends StatelessWidget {
+  const CelebrityShoutoutCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+
+    return Container(
+      width: w,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF003329), // deep green/teal like screenshot
+            Color(0xFF066953), // lighter teal right side
+          ],
+        ),
+      ),
+      child: Row(
+        children: [
+          // LEFT SECTION
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                const Text(
+                  "Celebrity Shoutouts:\nMake Moments Memorable",
+                  style: TextStyle(
+                    color: Color(0xFFF5D36C), // yellow title
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Bullet Points
+                const Text(
+                  "• Get personalized shoutouts from top celebrities.\n"
+                      "• Celebrate birthdays, anniversaries, or milestones with star power.\n"
+                      "• Promote your brand or event with engaging celeb videos.",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    height: 1.5,
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Button
+                Container(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0FE4A5),
+                    borderRadius: BorderRadius.circular(22),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        "Get Shoutout",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      const Icon(Icons.arrow_forward,
+                          size: 18, color: Colors.black),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(width: 14),
+
+          // RIGHT IMAGE SECTION
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              // LEFT IMAGE (BIGGER)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: 95,          // BIGGER WIDTH
+                  height: 155,        // BIGGER HEIGHT
+                  color: Colors.black12,
+                  child: Image.asset(
+                    "assets/images/ritik.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 10),
+
+              // RIGHT IMAGE (SMALLER)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: 75,          // SMALLER WIDTH
+                  height: 135,        // SMALLER HEIGHT
+                  color: Colors.black12,
+                  child: Image.asset(
+                    "assets/images/rasmika.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+class LuckyWheelCard extends StatelessWidget {
+  const LuckyWheelCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0C1120),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Hot Games this Week",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          const SizedBox(height: 12),
+
+          // CARD
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFFB59833),
+                  Color(0xFFEED77C),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+            child: Row(
+              children: [
+                // Wheel Image
+                SizedBox(
+                  width: 130,
+                  height: 130,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/images/wheel.png",
+                        fit: BoxFit.contain,
+                      ),
+
+
+                    ],
+                  ),
+                ),
+
+                const SizedBox(width: 20),
+
+                // Text + Button
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // NEW Badge
+                      Container(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF536DFF),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const Text(
+                          "New",
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      const Text(
+                        "Spin the Lucky wheel",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF2C2C2C),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      const Text(
+                        "Win up to 500 bonus coins daily !",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF2A2A2A),
+                        ),
+                      ),
+
+                      const SizedBox(height: 18),
+
+                      // START NOW BUTTON
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 22, vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xFF38E89E),
+                              Color(0xFF13C8C3),
+                            ],
+                          ),
+                        ),
+                        child: const Text(
+                          "Start Now",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class BrandCard extends StatelessWidget {
+  final String image;
+  final String title;
+  final String requirement;
+  final String ratings;
+  final String price;
+
+  const BrandCard({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.requirement,
+    required this.ratings,
+    required this.price,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 160,
+      margin: const EdgeInsets.only(right: 14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0B0F1F),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Column(
+        children: [
+          // IMAGE WITH OVERLAY BUTTON
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(
+                  image,
+                  width: 160,
+                  height: 170,
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              // VIEW BUTTON
+              Positioned(
+                right: 10,
+                top: 10,
+                child: Container(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: const Color(0xFF35E6A8),
+                  ),
+                  child: const Text(
+                    "View",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 10),
+
+          // TITLE
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 5),
+
+          // PRICE + RATING ROW
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              children: [
+                Image.asset(
+                  "assets/coin.png",
+                  width: 18,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  price,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                ),
+
+                const Spacer(),
+
+                // ⭐ RATING
+                const Icon(Icons.star, size: 16, color: Color(0xFFFFD66B)),
+                const SizedBox(width: 3),
+                Text(
+                  ratings,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 6),
+
+          // REQUIREMENT
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              requirement,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+                fontSize: 12,
+                height: 1.2,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 12),
         ],
       ),
     );
