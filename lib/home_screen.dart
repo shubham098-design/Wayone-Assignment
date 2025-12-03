@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedTab = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +16,13 @@ class HomeScreen extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0B0F1F),
+      bottomNavigationBar: CustomBottomBar(
+        selectedIndex: selectedTab,
+        onTap: (index) {
+          setState(() => selectedTab = index);
+        },
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -169,6 +183,9 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: h * 0.03),
+                FeaturedVideographers(),
+                SizedBox(height: h * 0.03),
 
               ],
             ),
@@ -460,31 +477,32 @@ class CelebrityShoutoutCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xFF003329), // deep green/teal like screenshot
-            Color(0xFF066953), // lighter teal right side
+            Color(0xFF003329),
+            Color(0xFF066953),
           ],
         ),
       ),
-      child: Row(
+
+      child: Stack(
         children: [
-          // LEFT SECTION
-          Expanded(
+
+          /// MAIN LEFT TEXT AREA
+          Padding(
+            padding: const EdgeInsets.only(right: 150, bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
                 const Text(
                   "Celebrity Shoutouts:\nMake Moments Memorable",
                   style: TextStyle(
-                    color: Color(0xFFF5D36C), // yellow title
+                    color: Color(0xFFF5D36C),
                     fontWeight: FontWeight.w700,
-                    fontSize: 16,
+                    fontSize: 17,
                   ),
                 ),
 
                 const SizedBox(height: 12),
 
-                // Bullet Points
                 const Text(
                   "• Get personalized shoutouts from top celebrities.\n"
                       "• Celebrate birthdays, anniversaries, or milestones with star power.\n"
@@ -492,33 +510,30 @@ class CelebrityShoutoutCard extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 13,
-                    height: 1.5,
+                    height: 1.45,
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
 
-                // Button
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0FE4A5),
+                    color: Color(0xFF0FE4A5),
                     borderRadius: BorderRadius.circular(22),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         "Get Shoutout",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      const Icon(Icons.arrow_forward,
-                          size: 18, color: Colors.black),
+                      SizedBox(width: 6),
+                      Icon(Icons.arrow_forward, size: 18, color: Colors.black),
                     ],
                   ),
                 ),
@@ -526,43 +541,34 @@ class CelebrityShoutoutCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(width: 14),
-
-          // RIGHT IMAGE SECTION
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              // LEFT IMAGE (BIGGER)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  width: 95,          // BIGGER WIDTH
-                  height: 155,        // BIGGER HEIGHT
-                  color: Colors.black12,
+          /// RIGHT SIDE IMAGES
+          Positioned(
+            right: 0,
+            top: 10,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
                     "assets/images/ritik.png",
+                    width: 90,
+                    height: 160,
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),
-
-              const SizedBox(width: 10),
-
-              // RIGHT IMAGE (SMALLER)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  width: 75,          // SMALLER WIDTH
-                  height: 135,        // SMALLER HEIGHT
-                  color: Colors.black12,
+                const SizedBox(width: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
                     "assets/images/rasmika.png",
+                    width: 70,
+                    height: 150,
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -572,11 +578,14 @@ class CelebrityShoutoutCard extends StatelessWidget {
 
 
 
+
 class LuckyWheelCard extends StatelessWidget {
   const LuckyWheelCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -597,12 +606,12 @@ class LuckyWheelCard extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // CARD
+          // GOLD CARD
           Container(
+            height: 240,
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(20),
               gradient: const LinearGradient(
                 colors: [
                   Color(0xFFB59833),
@@ -612,31 +621,29 @@ class LuckyWheelCard extends StatelessWidget {
                 end: Alignment.centerRight,
               ),
             ),
-            child: Row(
+
+            child: Stack(
               children: [
-                // Wheel Image
-                SizedBox(
-                  width: 130,
-                  height: 130,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/wheel.png",
-                        fit: BoxFit.contain,
-                      ),
-
-
-                    ],
+                // Wheel Image (LEFT SIDE)
+                Positioned(
+                  left: 30,
+                  top: 50,
+                  child: SizedBox(
+                    width: 180,
+                    height: 180,
+                    child: Image.asset(
+                      "assets/images/wheel.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
 
-                const SizedBox(width: 20),
-
-                // Text + Button
-                Expanded(
+                // TEXT + BADGE + BUTTON (RIGHT SIDE)
+                Positioned(
+                  right: 20,
+                  top: 20,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       // NEW Badge
                       Container(
@@ -652,33 +659,41 @@ class LuckyWheelCard extends StatelessWidget {
                         ),
                       ),
 
+                      const SizedBox(height: 16),
+
+                      const SizedBox(
+                        width: 140,
+                        child: Text(
+                          "Spin the Lucky wheel",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xFF2C2C2C),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+
                       const SizedBox(height: 12),
 
-                      const Text(
-                        "Spin the Lucky wheel",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color(0xFF2C2C2C),
-                          fontWeight: FontWeight.w700,
+                      const SizedBox(
+                        width: 150,
+                        child: Text(
+                          "Win up to 500 bonus coins daily !",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF2A2A2A),
+                          ),
                         ),
                       ),
 
-                      const SizedBox(height: 8),
-
-                      const Text(
-                        "Win up to 500 bonus coins daily !",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF2A2A2A),
-                        ),
-                      ),
-
-                      const SizedBox(height: 18),
+                      const SizedBox(height: 20),
 
                       // START NOW BUTTON
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 10),
+                            horizontal: 20, vertical: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           gradient: const LinearGradient(
@@ -696,10 +711,10 @@ class LuckyWheelCard extends StatelessWidget {
                             fontSize: 14,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           )
@@ -709,143 +724,186 @@ class LuckyWheelCard extends StatelessWidget {
   }
 }
 
-class BrandCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final String requirement;
-  final String ratings;
-  final String price;
 
-  const BrandCard({
+class CustomBottomBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onTap;
+
+  const CustomBottomBar({
     super.key,
-    required this.image,
-    required this.title,
-    required this.requirement,
-    required this.ratings,
-    required this.price,
+    required this.selectedIndex,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160,
-      margin: const EdgeInsets.only(right: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+      margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
       decoration: BoxDecoration(
-        color: const Color(0xFF0B0F1F),
-        borderRadius: BorderRadius.circular(18),
+        color: const Color(0xFF101624),
+        borderRadius: BorderRadius.circular(40),
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // IMAGE WITH OVERLAY BUTTON
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(18),
-                child: Image.asset(
-                  image,
-                  width: 160,
-                  height: 170,
-                  fit: BoxFit.cover,
-                ),
-              ),
 
-              // VIEW BUTTON
-              Positioned(
-                right: 10,
-                top: 10,
-                child: Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: const Color(0xFF35E6A8),
-                  ),
-                  child: const Text(
-                    "View",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 10),
-
-          // TITLE
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
+          // HOME (Selected)
+          selectedIndex == 0
+              ? Container(
+            padding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1DA37A),
+              borderRadius: BorderRadius.circular(30),
             ),
-          ),
-
-          const SizedBox(height: 5),
-
-          // PRICE + RATING ROW
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
-              children: [
-                Image.asset(
-                  "assets/coin.png",
-                  width: 18,
-                ),
-                const SizedBox(width: 4),
+              children: const [
+                Icon(Icons.home,
+                    color: Colors.white, size: 22),
+                SizedBox(width: 6),
                 Text(
-                  price,
-                  style: const TextStyle(
+                  "Home",
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 13,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
                   ),
-                ),
-
-                const Spacer(),
-
-                // ⭐ RATING
-                const Icon(Icons.star, size: 16, color: Color(0xFFFFD66B)),
-                const SizedBox(width: 3),
-                Text(
-                  ratings,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-                ),
+                )
               ],
             ),
+          )
+              : IconButton(
+            icon: Icon(Icons.home,
+                color: Colors.white.withOpacity(0.25), size: 22),
+            onPressed: () => onTap(0),
           ),
 
-          const SizedBox(height: 6),
-
-          // REQUIREMENT
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              requirement,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
-                fontSize: 12,
-                height: 1.2,
-              ),
-            ),
+          // VOLUME
+          IconButton(
+            icon: Icon(Icons.volume_up,
+                color: selectedIndex == 1
+                    ? Colors.white
+                    : Colors.white.withOpacity(0.25),
+                size: 22),
+            onPressed: () => onTap(1),
           ),
 
-          const SizedBox(height: 12),
+          // PROFILE
+          IconButton(
+            icon: Icon(Icons.person,
+                color: selectedIndex == 2
+                    ? Colors.white
+                    : Colors.white.withOpacity(0.25),
+                size: 22),
+            onPressed: () => onTap(2),
+          ),
+
+          // GIFT
+          IconButton(
+            icon: Icon(Icons.card_giftcard,
+                color: selectedIndex == 3
+                    ? Colors.white
+                    : Colors.white.withOpacity(0.25),
+                size: 22),
+            onPressed: () => onTap(3),
+          ),
         ],
       ),
+    );
+  }
+}
+
+
+class FeaturedVideographers extends StatelessWidget {
+  const FeaturedVideographers({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        const Text(
+          "Featured Videographers",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+        const SizedBox(height: 14),
+
+        SizedBox(
+          height: 120,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: const [
+              VideographerItem(
+                image: "assets/images/sanya.png",
+                name: "sanya",
+              ),
+              SizedBox(width: 22),
+              VideographerItem(
+                image: "assets/images/shaina.png",
+                name: "Shaina.M",
+              ),
+              SizedBox(width: 22),
+              VideographerItem(
+                image: "assets/images/kartik.png",
+                name: "Kartik Roy",
+              ),
+              SizedBox(width: 22),
+
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class VideographerItem extends StatelessWidget {
+  final String image;
+  final String name;
+
+  const VideographerItem({
+    super.key,
+    required this.image,
+    required this.name,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(3), // thin border spacing
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Color(0xFF3CD2C9), width: 2),
+          ),
+          child: ClipOval(
+            child: Image.asset(
+              image,
+              width: 68,
+              height: 68,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 8),
+
+        Text(
+          name,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 13,
+          ),
+        )
+      ],
     );
   }
 }
