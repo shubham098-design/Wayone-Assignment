@@ -334,8 +334,8 @@ class InviteBannerExact extends StatelessWidget {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            Color(0xFFE85F4F), // same orange-red shade
-            Color(0xFFE87A60), // lighter curved blend
+            Color(0xFFE85F4F), 
+            Color(0xFFE87A60), 
           ],
         ),
       ),
@@ -343,7 +343,6 @@ class InviteBannerExact extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
         child: Stack(
           children: [
-            // BACKGROUND CURVES
             Positioned(
               right: -40,
               top: -10,
@@ -369,17 +368,15 @@ class InviteBannerExact extends StatelessWidget {
               ),
             ),
 
-            // MAIN CONTENT
             Row(
               children: [
-                // LEFT IMAGE
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: SizedBox(
                     width: w * 0.28,
                     height: 150,
                     child: Image.asset(
-                      "assets/images/user.png", // Change your path
+                      "assets/images/user.png", 
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -387,7 +384,6 @@ class InviteBannerExact extends StatelessWidget {
 
                 const SizedBox(width: 10),
 
-                // TEXT + BUTTON
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -486,7 +482,6 @@ class CelebrityShoutoutCard extends StatelessWidget {
       child: Stack(
         children: [
 
-          /// MAIN LEFT TEXT AREA
           Padding(
             padding: const EdgeInsets.only(right: 150, bottom: 10),
             child: Column(
@@ -541,7 +536,6 @@ class CelebrityShoutoutCard extends StatelessWidget {
             ),
           ),
 
-          /// RIGHT SIDE IMAGES
           Positioned(
             right: 0,
             top: 10,
@@ -606,7 +600,6 @@ class LuckyWheelCard extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // GOLD CARD
           Container(
             height: 240,
             width: double.infinity,
@@ -624,7 +617,6 @@ class LuckyWheelCard extends StatelessWidget {
 
             child: Stack(
               children: [
-                // Wheel Image (LEFT SIDE)
                 Positioned(
                   left: 30,
                   top: 50,
@@ -638,14 +630,12 @@ class LuckyWheelCard extends StatelessWidget {
                   ),
                 ),
 
-                // TEXT + BADGE + BUTTON (RIGHT SIDE)
                 Positioned(
                   right: 20,
                   top: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      // NEW Badge
                       Container(
                         padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -690,7 +680,6 @@ class LuckyWheelCard extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
-                      // START NOW BUTTON
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
@@ -748,7 +737,6 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
 
-          // HOME (Selected)
           selectedIndex == 0
               ? Container(
             padding:
@@ -779,7 +767,6 @@ class CustomBottomBar extends StatelessWidget {
             onPressed: () => onTap(0),
           ),
 
-          // VOLUME
           IconButton(
             icon: Icon(Icons.volume_up,
                 color: selectedIndex == 1
@@ -879,7 +866,7 @@ class VideographerItem extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.all(3), // thin border spacing
+          padding: const EdgeInsets.all(3), 
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: Color(0xFF3CD2C9), width: 2),
